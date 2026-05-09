@@ -8,8 +8,6 @@
  * The hook should accept an optional initial value.
  */
 
-import { useState } from 'react';
-
 // custom hook
 import useCounter from "./useCounter";
 
