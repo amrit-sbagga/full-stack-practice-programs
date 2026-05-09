@@ -15,3 +15,36 @@
  * Run: npm run 01
  * Test: open browser or use curl / Postman / Thunder Client
  */
+
+import express from "express";
+import cors from "cors";
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    uptime: Math.floor(process.uptime()),
+  });
+});
+
+app.get("/greet", (req, res) => {
+  const queryName = req.query.name;
+  if (queryName) {
+    res.json({ message: `Hello, ${queryName}!` });
+  } else {
+    res.json({ message: "Hello, Stranger!" });
+  }
+});
+
+const PORT_NO = 3001;
+app.listen(PORT_NO, () => {
+  console.log(`Server running on http://localhost:${PORT_NO}`);
+});
