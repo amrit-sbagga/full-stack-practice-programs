@@ -1,6 +1,6 @@
 # Full Stack Practice Programs
 
-Practice repo for React + Node.js programs — built to prep for HackerRank full-stack tests.
+Practice repo for React + Node.js practice programs.
 
 ## Structure
 
