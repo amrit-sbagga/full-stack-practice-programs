@@ -53,7 +53,7 @@ function FetchTable() {
     };
 
     fetchData();
-    () => controller.abort();
+    return () => controller.abort();
   }, []);
 
   if (loading) return <p>Loading...</p>;
