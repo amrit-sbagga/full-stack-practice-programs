@@ -8,6 +8,35 @@
  * The hook should accept an optional initial value.
  */
 
-export default function CounterCustomHook() {
-  return <div />;
+import { useState } from 'react';
+
+// custom hook
+import useCounter from "./useCounter";
+
+function CounterCustomHook() {
+  const {
+    count, 
+    incrementCounter, 
+    decrementCounter,
+    resetCounter
+  } = useCounter(0);
+  
+  return <>
+    <div style={{"marginBottom":"12px"}}>Count (using Custom Hook) is : {count}</div>
+     <button onClick={incrementCounter}
+        style={{"marginRight":"12px"}}
+     >
+       Increment
+     </button>
+     <button onClick={decrementCounter}
+     style={{"marginRight":"12px"}}
+     >
+       Decrement
+     </button>
+     <button onClick={resetCounter}>
+       Reset
+     </button>
+  </>
 }
+
+export default CounterCustomHook;
