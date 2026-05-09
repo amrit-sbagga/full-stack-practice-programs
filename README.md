@@ -1,6 +1,6 @@
 # Full Stack Practice Programs
 
-Practice repo for React + Node.js practice programs.
+Practice repo for React + Node.js programs.
 
 ## Structure
 
