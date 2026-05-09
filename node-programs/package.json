@@ -1,0 +1,31 @@
+{
+  "name": "node-programs",
+  "version": "1.0.0",
+  "description": "Node.js / Express practice programs for HackerRank test prep",
+  "type": "module",
+  "scripts": {
+    "10": "nodemon programs/10-rate-limiter/index.js",
+    "11": "nodemon programs/11-event-emitter/index.js",
+    "12": "nodemon programs/12-data-transformation/index.js",
+    "01": "nodemon programs/01-hello-express/index.js",
+    "02": "nodemon programs/02-rest-api-crud/index.js",
+    "03": "nodemon programs/03-middleware/index.js",
+    "04": "nodemon programs/04-query-filter-sort/index.js",
+    "05": "nodemon programs/05-file-operations/index.js",
+    "06": "nodemon programs/06-async-promises/index.js",
+    "07": "nodemon programs/07-fetch-external-api/index.js",
+    "08": "nodemon programs/08-error-handling/index.js",
+    "09": "nodemon programs/09-jwt-auth/index.js"
+  },
+  "dependencies": {
+    "axios": "^1.16.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
