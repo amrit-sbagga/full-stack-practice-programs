@@ -1,11 +1,12 @@
 /**
- * Program 06 — Array of Objects → Table + Dropdown
- * Goal: Given an array of user objects, display them in an HTML table
- *       AND in a <select> dropdown. Selecting from the dropdown highlights the row.
- * Concepts: Array.map, controlled <select>, conditional className, table rendering
+ * PROGRAM 06 — Array of Objects → Table + Dropdown
+ *
+ * Given the array below, render:
+ *   1. A <select> dropdown listing all user names
+ *   2. A table with columns: #, Name, Role, Age
+ *
+ * When the user selects a name from the dropdown, highlight that row in the table.
  */
-import { useState } from "react";
-import ProgramShell from "../ProgramShell";
 
 const USERS = [
   { id: 1, name: "Alice", role: "Admin", age: 28 },
@@ -16,18 +17,5 @@ const USERS = [
 ];
 
 export default function ArrayTableDropdown() {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  // TODO: render a <select> that sets selectedId
-  // TODO: render a <table> with headers: Name, Role, Age
-  //       highlight the row whose id === selectedId
-
-  return (
-    <ProgramShell
-      title="06 — Array → Table + Dropdown"
-      concepts={["Array.map", "controlled select", "conditional className", "table"]}
-    >
-      <p className="text-slate-400 italic text-sm">TODO: render dropdown and table from USERS array</p>
-    </ProgramShell>
-  );
+  return <div />;
 }

@@ -1,24 +1,13 @@
 /**
- * Program 02 — Counter (Custom Hook)
- * Goal: Same counter UI but logic lives inside a custom hook `useCounter`.
- * Concepts: custom hooks, separation of concerns, hook return values
+ * PROGRAM 02 — Counter using a Custom Hook
+ *
+ * Same counter UI as Program 01 (Increment / Decrement / Reset),
+ * but ALL the counter logic must live inside a custom hook called useCounter.
+ *
+ * The component itself should only call the hook and render the UI.
+ * The hook should accept an optional initial value.
  */
-import ProgramShell from "../ProgramShell";
-
-// TODO: create useCounter hook that returns { count, increment, decrement, reset }
-function useCounter(initial = 0) {
-  // TODO: implement
-  return { count: initial, increment: () => {}, decrement: () => {}, reset: () => {} };
-}
 
 export default function CounterCustomHook() {
-  const { count, increment, decrement, reset } = useCounter(0);
-
-  // TODO: render count and three buttons using the hook values
-
-  return (
-    <ProgramShell title="02 — Counter (Custom Hook)" concepts={["custom hook", "useCounter", "encapsulation"]}>
-      <p className="text-slate-400 italic text-sm">TODO: implement custom hook and counter UI</p>
-    </ProgramShell>
-  );
+  return <div />;
 }

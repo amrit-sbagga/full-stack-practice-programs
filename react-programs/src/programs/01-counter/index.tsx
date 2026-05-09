@@ -1,20 +1,13 @@
 /**
- * Program 01 — Counter (useState)
- * Goal: Display a count with Increment, Decrement, and Reset buttons.
- * Concepts: useState, event handlers, conditional styling
+ * PROGRAM 01 — Counter
+ *
+ * Build a counter app with:
+ *   - A number display showing the current count (starts at 0)
+ *   - An "Increment" button that adds 1
+ *   - A "Decrement" button that subtracts 1
+ *   - A "Reset" button that sets the count back to 0
  */
-import { useState } from "react";
-import ProgramShell from "../ProgramShell";
 
 export default function Counter() {
-  const [count, setCount] = useState(0);
-
-  // TODO: implement increment, decrement, reset handlers
-  // TODO: render the count and three buttons
-
-  return (
-    <ProgramShell title="01 — Counter (useState)" concepts={["useState", "event handlers"]}>
-      <p className="text-slate-400 italic text-sm">TODO: implement counter here</p>
-    </ProgramShell>
-  );
+  return <div />;
 }

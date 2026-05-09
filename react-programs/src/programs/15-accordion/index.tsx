@@ -1,11 +1,14 @@
 /**
- * Program 15 — Accordion
- * Goal: A list of FAQ items. Clicking a title expands its answer panel.
- *       Only one panel is open at a time (exclusive expand).
- * Concepts: array state (or index state), conditional rendering, toggle
+ * PROGRAM 15 — Accordion
+ *
+ * Build an accordion FAQ component using the items below.
+ *
+ * Requirements:
+ *   - Clicking a question expands its answer panel
+ *   - Only one panel can be open at a time (clicking another closes the current one)
+ *   - Clicking an open panel closes it
+ *   - Show a visual indicator (e.g. + / −) for open/closed state
  */
-import { useState } from "react";
-import ProgramShell from "../ProgramShell";
 
 const FAQ_ITEMS = [
   { id: 1, question: "What is React?", answer: "A JavaScript library for building user interfaces." },
@@ -15,18 +18,5 @@ const FAQ_ITEMS = [
 ];
 
 export default function Accordion() {
-  const [openId, setOpenId] = useState<number | null>(null);
-
-  // TODO: map FAQ_ITEMS to accordion rows
-  // TODO: clicking a row toggles openId (open if closed, close if already open)
-  // TODO: show answer panel only when item.id === openId
-
-  return (
-    <ProgramShell
-      title="15 — Accordion"
-      concepts={["toggle state", "conditional render", "exclusive expand"]}
-    >
-      <p className="text-slate-400 italic text-sm">TODO: accordion with exclusive expand for FAQ items</p>
-    </ProgramShell>
-  );
+  return <div />;
 }
