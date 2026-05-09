@@ -1,6 +1,6 @@
 # Node.js Practice Programs
 
-12 Node.js / Express programs for HackerRank test prep.
+12 Node.js / Express programs for coding test prep.
 
 ## How to Run
 

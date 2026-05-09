@@ -1,7 +1,7 @@
 {
   "name": "node-programs",
   "version": "1.0.0",
-  "description": "Node.js / Express practice programs for HackerRank test prep",
+  "description": "Node.js / Express practice programs for coding test prep",
   "type": "module",
   "scripts": {
     "10": "nodemon programs/10-rate-limiter/index.js",
