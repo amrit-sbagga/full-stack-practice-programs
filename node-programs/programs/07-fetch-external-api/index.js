@@ -27,3 +27,81 @@
  *
  * Run: npm run 07
  */
+
+import express from "express";
+import cors from "cors";
+import axios from "axios";
+
+const app = express();
+const BASE = "https://jsonplaceholder.typicode.com";
+const PORT = 3007;
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/users", async (req, res) => {
+  try {
+    const { data } = await axios.get(`${BASE}/users`);
+    const users = data.map((u) => ({
+      id: u.id,
+      name: u.name,
+      email: u.email,
+      city: u.address?.city ?? "",
+    }));
+    res.json(users);
+  } catch (err) {
+    const message =
+      axios.isAxiosError(err) && err.message ? err.message : "Network Error";
+    res.status(500).json({ error: message });
+  }
+});
+
+app.get("/users/:id/posts", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [userRes, postRes] = await Promise.all([
+      axios.get(`${BASE}/users/${id}`),
+      axios.get(`${BASE}/posts`, { params: { userId: id } }),
+    ]);
+
+    const user = userRes.data;
+    res.json({
+      user: { id: user.id, name: user.name },
+      posts: postRes.data.map((p) => ({ id: p.id, title: p.title })),
+    });
+  } catch (err) {
+    if (axios.isAxiosError(err) && err.response?.status === 404) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    const message =
+      axios.isAxiosError(err) && err.message ? err.message : "Network Error";
+    res.status(500).json({ error: message });
+  }
+});
+
+app.get("/posts/search", async (req, res) => {
+  try {
+    const raw = req.query.q;
+    const q =
+      raw === undefined || raw === null ? "" : String(raw).trim().toLowerCase();
+
+    const { data } = await axios.get(`${BASE}/posts`);
+
+    if (!q) {
+      return res.json([]);
+    }
+
+    const matches = data.filter((p) =>
+      String(p.title).toLowerCase().includes(q),
+    );
+    res.json(matches);
+  } catch (err) {
+    const message =
+      axios.isAxiosError(err) && err.message ? err.message : "Network Error";
+    res.status(500).json({ error: message });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Program 07 listening on http://localhost:${PORT}`);
+});
