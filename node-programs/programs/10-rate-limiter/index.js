@@ -21,3 +21,66 @@
  * Run: npm run 10
  * Test: hit the endpoint 6+ times quickly with curl or Postman
  */
+
+import express from "express";
+import cors from "cors";
+
+const app = express();
+const PORT = 3010;
+const WINDOW_MS = 60_000;
+const LIMIT = 5;
+
+const store = Object.create(null);
+
+function clientIp(req) {
+  return req.ip || req.socket.remoteAddress || "unknown";
+}
+
+function rateLimiter(req, res, next) {
+  const ip = clientIp(req);
+  const now = Date.now();
+
+  let record = store[ip];
+
+  if (!record || now >= record.resetTime) {
+    record = { count: 0, resetTime: now + WINDOW_MS };
+    store[ip] = record;
+  }
+
+  const resetEpochSeconds = Math.ceil(record.resetTime / 1000);
+  res.setHeader("X-RateLimit-Limit", String(LIMIT));
+  res.setHeader("X-RateLimit-Reset", String(resetEpochSeconds));
+
+  if (record.count >= LIMIT) {
+    const retryAfter = Math.max(1, Math.ceil((record.resetTime - now) / 1000));
+    res.setHeader("X-RateLimit-Remaining", "0");
+    return res.status(429).json({
+      error: "Too Many Requests",
+      retryAfter,
+    });
+  }
+
+  record.count += 1;
+  const remaining = LIMIT - record.count;
+  res.setHeader("X-RateLimit-Remaining", String(remaining));
+  res.locals.rateLimitRemaining = remaining;
+  next();
+}
+
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (_req, res) => {
+  res.json({ message: "Request successful", remaining: null });
+});
+
+app.get("/limited", rateLimiter, (_req, res) => {
+  res.json({
+    message: "Request successful",
+    remaining: res.locals.rateLimitRemaining,
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Program 10 listening on http://localhost:${PORT}`);
+});
