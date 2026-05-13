@@ -1,6 +1,6 @@
 # Node.js Practice Programs
 
-12 Node.js / Express programs for coding test prep.
+16 Node.js practice programs for coding test prep (HTTP, GraphQL graphql-http + Apollo, gRPC, tRPC).
 
 ## How to Run
 
@@ -13,8 +13,7 @@ npm run 02          # runs program 02
 # ... etc
 ```
 
-Each Express program runs on **port 3001**. Only run one at a time.
-Programs 06, 11, 12 are plain Node scripts (no server).
+Most early Express programs use **port 3001** (or the port noted in each program’s header). Only run one conflicting server at a time. **Programs 06, 11, 12** are plain Node scripts (no server). **13** GraphQL (graphql-http) **3013**, **14** Apollo **3014**, **15** gRPC **50051**, **16** tRPC **3016** (see each folder).
 
 Test your endpoints with **Postman**, **Thunder Client** (VS Code extension), or `curl`.
 
@@ -34,6 +33,10 @@ Test your endpoints with **Postman**, **Thunder Client** (VS Code extension), or
 | 10 | Rate Limiter | In-memory store, sliding window, 429 response |
 | 11 | Event Emitter | EventEmitter, .on, .once, custom class, error event |
 | 12 | Data Transformation | map, filter, reduce, sort, find — no for loops |
+| 13 | GraphQL (graphql-http) | `graphql` + `graphql-http`, schema, resolvers, POST /graphql |
+| 14 | GraphQL (Apollo Server) | Same Book API as 13, `@apollo/server`, Express middleware |
+| 15 | gRPC server | .proto, BookService, unary RPC, grpc-js |
+| 16 | tRPC + Express | Typed procedures, Zod, Express adapter (TypeScript) |
 
 ## Testing Tools
 

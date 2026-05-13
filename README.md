@@ -7,7 +7,7 @@ Practice repo for React + Node.js programs.
 ```
 full-stack-practice-programs/
 ├── react-programs/       # Vite + React + TypeScript app (18 programs)
-├── node-programs/        # Express/Node.js programs (12 programs)
+├── node-programs/        # Express/Node.js programs (16 programs)
 └── fullstack-programs/   # React + Node combined programs (coming soon)
 ```
 
@@ -62,8 +62,7 @@ npm run 02   # starts program 02
 # ... etc
 ```
 
-Each Express program runs on **port 3001**. Run only one at a time.
-Programs 06, 11, 12 are plain Node scripts (no server).
+Most HTTP programs use **port 3001** unless the exercise sets another port. Run only one conflicting server at a time. **Programs 06, 11, 12** are plain Node scripts (no server). **13–16**: GraphQL graphql-http (**3013**), Apollo (**3014**), gRPC (**50051**), tRPC (**3016**); see `node-programs/README.md`.
 
 Test APIs with **curl**, **Postman**, **Bruno**, or the **REST Client** VS Code extension.
 
@@ -83,6 +82,10 @@ Test APIs with **curl**, **Postman**, **Bruno**, or the **REST Client** VS Code 
 | 10 | Rate Limiter | In-memory store, sliding window, 429 response |
 | 11 | Event Emitter | EventEmitter, .on, .once, custom class, error event |
 | 12 | Data Transformation | map, filter, reduce, sort, find — no for loops |
+| 13 | GraphQL (graphql-http) | Schema, resolvers, `graphql-http` + Express |
+| 14 | GraphQL (Apollo Server) | Same shape as 13, Apollo + Express |
+| 15 | gRPC server | .proto, unary RPC, @grpc/grpc-js |
+| 16 | tRPC + Express | Typed router, Zod, Express adapter (TypeScript) |
 
 ### curl Quick Reference
 
