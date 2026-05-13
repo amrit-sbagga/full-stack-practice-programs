@@ -32,7 +32,75 @@
  * Run: npm run 13
  */
 
-console.log(
-  "Program 13 — GraphQL (graphql-http): implement in programs/13-graphql-server/index.js",
-);
-process.exit(0);
+import express from "express";
+import cors from "cors";
+import { buildSchema } from "graphql";
+import { createHandler } from "graphql-http/lib/use/express";
+
+const PORT = 3013;
+
+const schema = buildSchema(`
+   type Book {
+     id: ID!
+     title: String!
+     author: String!
+     year: Int!
+   }
+
+   type Query {
+     book(id: ID!): Book
+     books: [Book!]!
+   }
+
+   type Mutation {
+     addBook(title: String!, author: String!, year: Int!): Book!
+   }
+`);
+
+let nextId = 3;
+
+const books = [
+  { id: "1", title: "The Pragmatic Programmer", author: "Hunt & Thomas", year: 1999 },
+  { id: "2", title: "Designing Data-Intensive Applications", author: "Martin Kleppmann", year: 2017 },
+];
+
+// Top level keys books, book, addBook match Query & Mutation field names
+// Resolver shape is: (args, contextValue, info)
+// Root functions are invoked by graphql-js 
+// defaultFieldResolver as: fn(args, contextValue, info)
+// So the first parameter is the field's GraphQL arguments object.
+const rootValue = {
+  books: () => books,
+
+  book: (args) => {
+    const found = books.find((b) => b.id === args.id);
+    return found ?? null;
+  },
+
+  addBook: (args) => {
+    const { title, author, year } = args;
+    const id = String(nextId++);
+    const book = {
+      id,
+      title,
+      author,
+      year,
+    };
+    books.push(book);
+    return book;
+  },
+};
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+
+// createHandler -> wires graphql over http handler to express
+// both GET & POST allowed
+app.all("/graphql", createHandler({ schema, rootValue }));
+
+app.listen(PORT, () => {
+  console.log(`Program 13 — GraphQL listening on http://localhost:${PORT}/graphql`);
+});
+
