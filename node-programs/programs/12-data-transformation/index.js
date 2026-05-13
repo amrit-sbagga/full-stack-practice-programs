@@ -47,3 +47,61 @@ const employees = [
  * Log the result of each task with a label, e.g:
  *   console.log("Task 1:", result1)
  */
+
+// Task 1 - active only
+const task1 = employees.filter((e) => e.active);
+console.log("Task 1:", task1);
+
+// Task 2 - unique departments
+const task2 = [...new Set(employees.map((e) => e.dept))];
+console.log("Task 2:", task2);
+
+// Task 3 - total salary for active employees
+const task3 = employees
+    .filter((e) => e.active)
+    .reduce((sum, e) => sum + e.salary, 0);
+console.log("Task 3:", task3);
+
+
+// Task 4 - average salary per dept
+const deptStats = employees.reduce((acc, e) => {
+  if (!acc[e.dept]) acc[e.dept] = { sum: 0, count: 0 };
+  acc[e.dept].sum += e.salary;
+  acc[e.dept].count += 1;
+  return acc;
+}, Object.create(null));
+
+const task4 = Object.fromEntries(
+  Object.entries(deptStats).map(([dept, { sum, count }]) => [
+    dept,
+    Math.round(sum / count),
+  ]),
+);
+console.log("Task 4:", task4);
+
+
+// Task 5 - by salary desc
+const task5 = [...employees].sort((a, b) => b.salary - a.salary);
+console.log("Task 5:", task5);
+
+
+// Task 6 — Engineering & salary > 90000 → names
+const task6 = employees
+  .filter((e) => e.dept === "Engineering" && e.salary > 90000)
+  .map((e) => e.name);
+console.log("Task 6:", task6);
+
+
+// Task 7 — id → employee
+const task7 = employees.reduce((acc, e) => {
+  acc[e.id] = e;
+  return acc;
+}, Object.create(null));
+console.log("Task 7:", task7);
+
+
+// Task 8 — highest-paid among active employees
+const task8 = employees
+  .filter((e) => e.active)
+  .reduce((best, e) => (e.salary > best.salary ? e : best));
+console.log("Task 8:", task8);
