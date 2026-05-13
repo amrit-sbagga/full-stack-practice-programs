@@ -18,6 +18,7 @@ import P15Accordion from "./programs/15-accordion";
 import P16InfiniteScroll from "./programs/16-infinite-scroll";
 import P17Stopwatch from "./programs/17-stopwatch";
 import P18Autocomplete from "./programs/18-autocomplete";
+import P19EmployeeValidation from "./programs/19-form-validation-2";
 
 const programs = [
   { path: "01-counter", label: "01 · Counter (useState)" },
@@ -38,6 +39,7 @@ const programs = [
   { path: "16-infinite-scroll", label: "16 · Infinite Scroll" },
   { path: "17-stopwatch", label: "17 · Stopwatch with Laps" },
   { path: "18-autocomplete", label: "18 · Autocomplete" },
+  { path: "19-form-validation-2", label: "19 · Employee validation (HackerRank)" },
 ];
 
 function Sidebar() {
@@ -47,7 +49,7 @@ function Sidebar() {
         <Link to="/" className="text-lg font-bold text-white hover:text-indigo-400 transition-colors">
           React Practice
         </Link>
-        <p className="text-xs text-slate-400 mt-1">18 programs</p>
+        <p className="text-xs text-slate-400 mt-1">19 programs</p>
       </div>
       <ul className="flex-1 overflow-y-auto py-2">
         {programs.map((p) => (
@@ -117,6 +119,7 @@ export default function App() {
             <Route path="/16-infinite-scroll" element={<P16InfiniteScroll />} />
             <Route path="/17-stopwatch" element={<P17Stopwatch />} />
             <Route path="/18-autocomplete" element={<P18Autocomplete />} />
+            <Route path="/19-form-validation-2" element={<P19EmployeeValidation />} />
           </Routes>
         </main>
       </div>
