@@ -35,7 +35,59 @@
  * Run server: npm run 15   (or node programs/15-grpc-server/server.js)
  */
 
-console.log(
-  "Program 15 — gRPC: add book.proto and implement server.js (see comment block).",
+
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import * as grpc from "@grpc/grpc-js";
+import protoLoader from "@grpc/proto-loader";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const PROTO_PATH = path.join(__dirname, "book.proto");
+const HOST = "0.0.0.0:50051";
+
+const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
+  keepCase: true,
+  longs: String,
+  enums: String,
+  defaults: true,
+  oneofs: true,
+});
+
+const booksProto = grpc.loadPackageDefinition(packageDefinition);
+
+const booksData = [
+  { id: "1", title: "The Pragmatic Programmer", author: "Hunt & Thomas", year: 1999 },
+  { id: "2", title: "Designing Data-Intensive Applications", author: "Martin Kleppmann", year: 2017 },
+];
+
+const bookServiceImpl = {
+  GetBook(call, callback) {
+    const id = call.request.id;
+    const book = booksData.find((b) => b.id === id);
+    if (!book) {
+      callback({
+        code: grpc.status.NOT_FOUND,
+        message: `Book with id "${id}" not found`,
+      });
+      return;
+    }
+    callback(null, book);
+  },
+  ListBooks(_call, callback) {
+    callback(null, { books: booksData });
+  },
+};
+const server = new grpc.Server();
+server.addService(booksProto.books.BookService.service, bookServiceImpl);
+server.bindAsync(
+  HOST,
+  grpc.ServerCredentials.createInsecure(),
+  (err, port) => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+    server.start();
+    console.log(`gRPC BookService listening on ${HOST} (port ${port})`);
+  },
 );
-process.exit(0);
